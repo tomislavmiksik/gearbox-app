@@ -1,9 +1,8 @@
-package de.comsystoreply.gearbox.features.login.presentation
+package de.comsystoreply.gearbox.features.onboarding.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -16,7 +15,7 @@ import androidx.compose.ui.Modifier
 
 
 @Composable
-fun LoginScreen(onButtonPressed: () -> Unit) {
+fun FirstOnboardingScreen(onNextPressed: () -> Unit) {
     Scaffold { ip ->
         Column(
             verticalArrangement = Arrangement.Center,
@@ -26,10 +25,8 @@ fun LoginScreen(onButtonPressed: () -> Unit) {
                 .verticalScroll(rememberScrollState())
                 .padding(ip)
         ) {
-            val widthModifier = Modifier.fillMaxWidth()
-            Text(text = "login")
-            TextButton(onButtonPressed) {
-                Text("Back")
+            TextButton(onNextPressed) {
+                Text(text = "Go to Second Onboarding")
             }
         }
     }

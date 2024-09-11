@@ -11,10 +11,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.ramcosta.composedestinations.DestinationsNavHost
-import com.ramcosta.composedestinations.rememberNavHostEngine
 import dagger.hilt.android.AndroidEntryPoint
-import de.comsystoreply.gearbox.features.NavGraphs
+import de.comsystoreply.gearbox.navigation.RootNavHost
 import de.comsystoreply.gearbox.ui.theme.GearboxTheme
 
 @AndroidEntryPoint
@@ -27,15 +25,8 @@ class MainActivity : ComponentActivity() {
             GearboxTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { _ ->
                     val navController = rememberNavController()
-                    val navHostEngine = rememberNavHostEngine()
                     val newBackStackEntry by navController.currentBackStackEntryAsState()
-                    val route = newBackStackEntry?.destination?.route
-
-                    DestinationsNavHost(
-                        navGraph = NavGraphs.root,
-                        navController = navController,
-                        engine = navHostEngine
-                    )
+                    RootNavHost()
                 }
             }
         }
