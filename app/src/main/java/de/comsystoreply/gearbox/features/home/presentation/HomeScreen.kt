@@ -1,9 +1,9 @@
 package de.comsystoreply.gearbox.features.home.presentation
 
-//noinspection UsingMaterialAndMaterial3Libraries
-//noinspection UsingMaterialAndMaterial3Libraries
 import android.annotation.SuppressLint
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.BottomNavigationItem
+//noinspection UsingMaterialAndMaterial3Libraries
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Newspaper
@@ -14,11 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import de.comsystoreply.gearbox.features.home.viewmodel.HomeViewModel
 import de.comsystoreply.gearbox.navigation.HomeNavGraph
 import de.comsystoreply.gearbox.navigation.ScreenRoutes
 import de.comsystoreply.gearbox.ui.theme.DarkBlue
@@ -26,7 +28,7 @@ import de.comsystoreply.gearbox.ui.theme.LightGray
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(logout: () -> Unit) {
+fun HomeScreen(logout: () -> Unit, viewModel: HomeViewModel = hiltViewModel<HomeViewModel>()) {
     val navController = rememberNavController()
 
     val bottomNavItems = mutableListOf(

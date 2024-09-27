@@ -17,15 +17,15 @@ import de.comsystoreply.gearbox.features.profile.presentation.ProfileScreen
 
 sealed class ScreenRoutes(val route: String) {
 
-    //MARK: Onboarding screen routes
+    //* Onboarding screen routes
     data object Onboarding : ScreenRoutes("onboarding")
     data object FirstOnboarding : ScreenRoutes("onboarding-first")
     data object SecondOnboarding : ScreenRoutes("onboarding-second")
 
-    //MARK: Auth screen routes
+    //* Auth screen routes
     data object Login : ScreenRoutes("login")
 
-    //MARK: Home screen routes
+    //* Home screen routes
     data object Home : ScreenRoutes("home")
     data object Blog : ScreenRoutes("blog")
     data object Garage : ScreenRoutes("garage")

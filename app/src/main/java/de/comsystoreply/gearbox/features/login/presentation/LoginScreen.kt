@@ -16,7 +16,10 @@ import androidx.compose.ui.Modifier
 
 
 @Composable
-fun LoginScreen(onButtonPressed: () -> Unit, onLoginPressed: () -> Unit) {
+fun LoginScreen(
+    onButtonPressed: () -> Unit,
+    onLoginPressed: () -> Unit,
+) {
     Scaffold { ip ->
         Column(
             verticalArrangement = Arrangement.Center,
