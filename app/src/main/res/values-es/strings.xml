@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Gearbox</string>
+
+    <!-- Navigation -->
+    <string name="nav_blogs">Blogs</string>
+    <string name="nav_garage">Garaje</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome">Bienvenido a Gearbox</string>
+    <string name="onboarding_description">Tu compañero automotriz</string>
+    <string name="onboarding_next">Siguiente</string>
+    <string name="onboarding_get_started">Comenzar</string>
+
+    <!-- Login -->
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="login_email">Correo</string>
+    <string name="login_password">Contraseña</string>
+    <string name="login_button">Iniciar Sesión</string>
+    <string name="login_back">Atrás</string>
+
+    <!-- Home -->
+    <string name="home_welcome">Bienvenido a Casa</string>
+    <string name="home_logout">Cerrar Sesión</string>
+
+    <!-- Blogs -->
+    <string name="blogs_title">Bienvenido a Blogs</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Bienvenido al Perfil</string>
+
+    <!-- Common -->
+    <string name="action_loading">Cargando…</string>
+    <string name="action_error">Error ocurrido</string>
+    <string name="action_retry">Reintentar</string>
+</resources>
