@@ -2,9 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.dagger.hilt.android)
     kotlin("plugin.serialization") version "2.0.20"
-    kotlin("kapt") version "2.0.20"
 }
 
 android {
@@ -87,11 +85,10 @@ dependencies {
     // Testing Navigation
     androidTestImplementation(libs.navigation.testing)
 
-    //Dagger & Hilt
-    implementation(libs.dagger.hilt.android)
-    kapt(libs.hilt.android.compiler)
-    kapt(libs.androidx.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+    //Koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.core)
 
     //Timber
     implementation(libs.timber)
