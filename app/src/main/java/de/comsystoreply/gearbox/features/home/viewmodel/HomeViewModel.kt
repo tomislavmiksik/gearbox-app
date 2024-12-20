@@ -4,18 +4,15 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import de.comsystoreply.gearbox.domain.models.TestResponse
 import de.comsystoreply.gearbox.domain.services.ApiService
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
+class HomeViewModel(
     private val apiService: ApiService
 ) : ViewModel() {
 
-    val message: MutableState<TestResponse> = mutableStateOf(TestResponse())
+    private val message: MutableState<TestResponse> = mutableStateOf(TestResponse())
 
     fun getMessage() =
         viewModelScope.launch {
