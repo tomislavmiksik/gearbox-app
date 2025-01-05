@@ -3,7 +3,10 @@ package de.comsystoreply.gearbox.navigation
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -32,25 +35,29 @@ fun GearboxNavigation(
             composable<FirstOnboardingScreen> {
                 FirstOnboardingScreen(
                     onNextPressed = {
-                        navController.navigate(SecondOnboardingScreen)
-                    },
-                    routeName = "FirstOnboarding"
+                        navController.navigate(SecondOnboardingScreen) {
+                            launchSingleTop = true
+                        }
+                    }
                 )
             }
             composable<SecondOnboardingScreen> {
                 SecondOnboardingScreen(
                     onNextPressed = {
-                        navController.navigate(LoginScreen)
-                    },
-                    routeName = "SecondOnboarding"
+                        navController.navigate(LoginScreen) {
+                            launchSingleTop = true
+                        }
+                    }
                 )
             }
         }
-        
+
         composable<LoginScreen> {
             LoginScreen(
-                onButtonPressed = {
-                    navController.navigate(FirstOnboardingScreen)
+                onBackPressed = {
+                    navController.navigate(FirstOnboardingScreen) {
+                        launchSingleTop = true
+                    }
                 },
                 onLoginPressed = {
                     navController.navigate(HomeGraph) {
@@ -60,7 +67,7 @@ fun GearboxNavigation(
                 }
             )
         }
-        
+
         composable<HomeGraph> {
             HomeScreen(
                 logout = {
@@ -77,7 +84,8 @@ fun GearboxNavigation(
 @Composable
 fun HomeNavigation(
     navController: NavHostController = rememberNavController(),
-    logout: () -> Unit
+    logout: () -> Unit,
+    contentPadding: PaddingValues = PaddingValues()
 ) {
     NavHost(
         navController = navController,
@@ -86,10 +94,26 @@ fun HomeNavigation(
         exitTransition = { fadeOut(animationSpec = tween(150)) }
     ) {
         composable<BlogScreen> {
-            BlogScreen()
+            BlogScreen(
+                onNavigateToProfile = {
+                    navController.navigate(GarageScreen) {
+                        popUpTo(navController.graph.findStartDestination().id)
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
+            )
         }
         composable<GarageScreen> {
-            ProfileScreen()
+            ProfileScreen(
+                onNavigateToBlogs = {
+                    navController.navigate(BlogScreen) {
+                        popUpTo(navController.graph.findStartDestination().id)
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
+            )
         }
     }
 }
