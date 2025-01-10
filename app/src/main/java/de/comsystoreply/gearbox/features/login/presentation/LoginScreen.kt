@@ -4,37 +4,46 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.ElevatedButton
-import androidx.compose.material3.Scaffold
+import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import de.comsystoreply.gearbox.R
 
 
 @Composable
 fun LoginScreen(
-    onButtonPressed: () -> Unit,
+    onBackPressed: () -> Unit,
     onLoginPressed: () -> Unit,
 ) {
-    Scaffold { ip ->
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
+            .padding(horizontal = 24.dp, vertical = 32.dp)
+    ) {
         Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(ip)
+            verticalArrangement = Arrangement.spacedBy(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "login")
-            TextButton(onButtonPressed) {
-                Text("Back")
+            Text(text = stringResource(R.string.login_title))
+            
+            TextButton(onClick = onBackPressed) {
+                Text(stringResource(R.string.login_back))
             }
-            ElevatedButton(onLoginPressed) {
-                Text(text = "Go to Home Screen")
+            
+            ElevatedButton(
+                onClick = onLoginPressed,
+                modifier = Modifier.padding(top = 16.dp)
+            ) {
+                Text(text = stringResource(R.string.login_button))
             }
         }
     }
