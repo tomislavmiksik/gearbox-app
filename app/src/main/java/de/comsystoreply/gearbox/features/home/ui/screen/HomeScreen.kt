@@ -1,4 +1,4 @@
-package de.comsystoreply.gearbox.features.home.presentation
+package de.comsystoreply.gearbox.features.home.ui.screen
 
 import android.annotation.SuppressLint
 import androidx.compose.material.icons.Icons

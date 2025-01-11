@@ -11,13 +11,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
-import de.comsystoreply.gearbox.features.blogs.presentation.BlogScreen
-import de.comsystoreply.gearbox.features.home.presentation.HomeScreen
-import de.comsystoreply.gearbox.features.login.presentation.LoginScreen
-import de.comsystoreply.gearbox.features.onboarding.presentation.FirstOnboardingScreen
-import de.comsystoreply.gearbox.features.onboarding.presentation.SecondOnboardingScreen
-import de.comsystoreply.gearbox.features.onboarding.presentation.ThirdOnboardingScreen
-import de.comsystoreply.gearbox.features.profile.presentation.ProfileScreen
+import de.comsystoreply.gearbox.features.blogs.ui.screen.BlogScreen
+import de.comsystoreply.gearbox.features.home.ui.screen.HomeScreen
+import de.comsystoreply.gearbox.features.login.ui.screen.LoginScreen
+import de.comsystoreply.gearbox.features.onboarding.navigation.OnboardingNavHost
+import de.comsystoreply.gearbox.features.profile.ui.screen.ProfileScreen
 
 @Composable
 fun GearboxNavigation(
@@ -29,42 +27,21 @@ fun GearboxNavigation(
         enterTransition = { fadeIn(animationSpec = tween(200)) },
         exitTransition = { fadeOut(animationSpec = tween(200)) }
     ) {
-        navigation<OnboardingGraph>(
-            startDestination = FirstOnboardingScreen
-        ) {
-            composable<FirstOnboardingScreen> {
-                FirstOnboardingScreen(
-                    onNextPressed = {
-                        navController.navigate(SecondOnboardingScreen) {
-                            launchSingleTop = true
-                        }
+        composable<OnboardingGraph> {
+            OnboardingNavHost(
+                onOnboardingComplete = {
+                    navController.navigate(LoginScreen) {
+                        popUpTo(OnboardingGraph) { inclusive = true }
+                        launchSingleTop = true
                     }
-                )
-            }
-            composable<SecondOnboardingScreen> {
-                SecondOnboardingScreen(
-                    onNextPressed = {
-                        navController.navigate(ThirdOnboardingScreen) {
-                            launchSingleTop = true
-                        }
-                    }
-                )
-            }
-            composable<ThirdOnboardingScreen> {
-                ThirdOnboardingScreen(
-                    onGetStartedPressed = {
-                        navController.navigate(LoginScreen) {
-                            popUpTo(0)
-                        }
-                    }
-                )
-            }
+                }
+            )
         }
 
         composable<LoginScreen> {
             LoginScreen(
                 onBackPressed = {
-                    navController.navigate(FirstOnboardingScreen) {
+                    navController.navigate(OnboardingGraph) {
                         launchSingleTop = true
                     }
                 },

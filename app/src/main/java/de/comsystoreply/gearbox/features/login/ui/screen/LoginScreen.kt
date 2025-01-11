@@ -1,4 +1,4 @@
-package de.comsystoreply.gearbox.features.login.presentation
+package de.comsystoreply.gearbox.features.login.ui.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -17,10 +17,9 @@ import de.comsystoreply.gearbox.ui.components.inputs.GearboxTextField
 import de.comsystoreply.gearbox.ui.components.text.GearboxTitle
 import de.comsystoreply.gearbox.ui.components.text.GearboxSubtitle
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,15 +29,25 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import de.comsystoreply.gearbox.R
+import de.comsystoreply.gearbox.features.login.ui.viewmodel.LoginViewModel
+import de.comsystoreply.gearbox.features.login.ui.viewmodel.LoginIntent
+import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun LoginScreen(
     onBackPressed: () -> Unit,
     onLoginPressed: () -> Unit,
+    viewModel: LoginViewModel = koinViewModel()
 ) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    val uiState by viewModel.uiState.collectAsState()
+    
+    LaunchedEffect(uiState.isLoginSuccessful) {
+        if (uiState.isLoginSuccessful) {
+            onLoginPressed()
+            viewModel.resetLoginSuccess()
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -66,8 +75,8 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(40.dp))
 
         GearboxTextField(
-            value = email,
-            onValueChange = { email = it },
+            value = uiState.email,
+            onValueChange = { viewModel.handleIntent(LoginIntent.EmailChanged(it)) },
             label = stringResource(R.string.login_email),
             placeholder = stringResource(R.string.login_email_hint),
             keyboardType = KeyboardType.Email,
@@ -77,8 +86,8 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         GearboxTextField(
-            value = password,
-            onValueChange = { password = it },
+            value = uiState.password,
+            onValueChange = { viewModel.handleIntent(LoginIntent.PasswordChanged(it)) },
             label = stringResource(R.string.login_password),
             placeholder = stringResource(R.string.login_password_hint),
             keyboardType = KeyboardType.Password,
@@ -90,7 +99,7 @@ fun LoginScreen(
 
         GearboxButton(
             text = stringResource(R.string.login_button),
-            onClick = onLoginPressed,
+            onClick = { viewModel.handleIntent(LoginIntent.LoginClicked) },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -98,7 +107,7 @@ fun LoginScreen(
 
         GearboxOutlinedButton(
             text = stringResource(R.string.login_google),
-            onClick = { },
+            onClick = { viewModel.handleIntent(LoginIntent.GoogleLoginClicked) },
             modifier = Modifier.fillMaxWidth()
         )
 
@@ -106,7 +115,7 @@ fun LoginScreen(
 
         GearboxOutlinedButton(
             text = stringResource(R.string.login_apple),
-            onClick = { },
+            onClick = { viewModel.handleIntent(LoginIntent.AppleLoginClicked) },
             backgroundColor = Color.Black,
             textColor = Color.White,
             modifier = Modifier.fillMaxWidth()

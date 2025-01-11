@@ -6,7 +6,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.google.gson.Gson
 import de.comsystoreply.gearbox.domain.services.ApiService
-import de.comsystoreply.gearbox.features.home.viewmodel.HomeViewModel
+import de.comsystoreply.gearbox.features.home.ui.viewmodel.HomeViewModel
+import de.comsystoreply.gearbox.features.login.ui.viewmodel.LoginViewModel
 import de.comsystoreply.gearbox.util.Constants.AUTH_PREFERENCES
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
@@ -49,4 +50,5 @@ val networkModule = module {
 
 val viewModelModule = module {
     factory { HomeViewModel(get()) }
+    factory { LoginViewModel() }
 }

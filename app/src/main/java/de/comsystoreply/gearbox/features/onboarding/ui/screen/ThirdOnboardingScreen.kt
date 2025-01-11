@@ -1,4 +1,4 @@
-package de.comsystoreply.gearbox.features.onboarding.presentation
+package de.comsystoreply.gearbox.features.onboarding.ui.screen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource

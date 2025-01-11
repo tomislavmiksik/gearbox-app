@@ -1,4 +1,4 @@
-package de.comsystoreply.gearbox.features.profile.presentation
+package de.comsystoreply.gearbox.features.blogs.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,9 +16,8 @@ import androidx.compose.ui.res.stringResource
 import de.comsystoreply.gearbox.R
 
 @Composable
-fun ProfileScreen(
-    onNavigateToBlogs: () -> Unit = {},
-    modifier: Modifier = Modifier
+fun BlogScreen(
+    onNavigateToProfile: () -> Unit = {}
 ) {
     Scaffold { ip ->
         Column(
@@ -28,10 +27,10 @@ fun ProfileScreen(
                 .fillMaxSize()
                 .padding(ip)
         ) {
-            GearboxTitle(text = stringResource(R.string.profile_title))
+            GearboxTitle(text = stringResource(R.string.blogs_title))
             GearboxButton(
-                text = "Go to Blogs",
-                onClick = onNavigateToBlogs
+                text = "Go to Profile",
+                onClick = onNavigateToProfile
             )
         }
     }

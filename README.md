@@ -13,8 +13,9 @@ An Android automotive companion app built with Jetpack Compose and modern Androi
 ## Tech Stack
 
 - **UI**: Jetpack Compose with Material 3
-- **Architecture**: Clean Architecture with MVVM pattern
-- **Dependency Injection**: Koin
+- **Architecture**: Clean Architecture with MVI pattern
+- **State Management**: StateFlow with reactive UI updates
+- **Dependency Injection**: Koin (factory pattern for ViewModels)
 - **Navigation**: Type-safe navigation with Kotlin Serialization
 - **Build**: Gradle with Kotlin DSL
 
@@ -36,16 +37,41 @@ An Android automotive companion app built with Jetpack Compose and modern Androi
 ```
 app/
 ├── src/main/java/de/comsystoreply/gearbox/
-│   ├── features/          # Feature modules
-│   │   ├── onboarding/    # User onboarding flow
-│   │   ├── login/         # Authentication
-│   │   ├── home/          # Main dashboard
-│   │   ├── blogs/         # Blog content
-│   │   └── profile/       # User profile & garage
-│   ├── navigation/        # App navigation setup
-│   ├── di/               # Dependency injection modules
-│   └── ui/               # Theme and common UI components
+│   ├── features/                    # Feature modules
+│   │   ├── onboarding/
+│   │   │   ├── ui/screen/          # Onboarding screens
+│   │   │   └── navigation/         # Onboarding navigation
+│   │   ├── login/
+│   │   │   └── ui/
+│   │   │       ├── screen/         # Login screen
+│   │   │       └── viewmodel/      # Login ViewModel & state
+│   │   ├── home/
+│   │   │   └── ui/
+│   │   │       ├── screen/         # Home screen
+│   │   │       └── viewmodel/      # Home ViewModel & state
+│   │   ├── blogs/
+│   │   │   └── ui/screen/          # Blog screens
+│   │   └── profile/
+│   │       └── ui/screen/          # Profile screens
+│   ├── navigation/                  # App navigation setup
+│   ├── di/                         # Koin dependency injection
+│   ├── domain/                     # Business logic & models
+│   └── ui/                         # Theme & shared components
+│       ├── components/             # Reusable UI components
+│       │   ├── buttons/           # Button components
+│       │   ├── inputs/            # Input components
+│       │   ├── text/              # Text components
+│       │   └── indicators/        # Indicator components
+│       └── theme/                 # Material 3 theming
 ```
+
+## Architecture Highlights
+
+- **Feature-based organization**: Each feature has its own `ui/screen` and `ui/viewmodel` structure
+- **MVI Pattern**: ViewModels use StateFlow with sealed interface intents for reactive state management
+- **Shared UI Components**: Reusable Material 3 components following design system principles
+- **Type-safe Navigation**: Kotlin Serialization destinations with smooth animations
+- **Edge-to-edge Design**: Proper safe area handling with modern Android UI patterns
 
 ## Contributing
 
