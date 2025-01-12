@@ -4,7 +4,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -17,6 +16,7 @@ import de.comsystoreply.gearbox.features.home.presentation.HomeScreen
 import de.comsystoreply.gearbox.features.login.presentation.LoginScreen
 import de.comsystoreply.gearbox.features.onboarding.presentation.FirstOnboardingScreen
 import de.comsystoreply.gearbox.features.onboarding.presentation.SecondOnboardingScreen
+import de.comsystoreply.gearbox.features.onboarding.presentation.ThirdOnboardingScreen
 import de.comsystoreply.gearbox.features.profile.presentation.ProfileScreen
 
 @Composable
@@ -44,8 +44,17 @@ fun GearboxNavigation(
             composable<SecondOnboardingScreen> {
                 SecondOnboardingScreen(
                     onNextPressed = {
-                        navController.navigate(LoginScreen) {
+                        navController.navigate(ThirdOnboardingScreen) {
                             launchSingleTop = true
+                        }
+                    }
+                )
+            }
+            composable<ThirdOnboardingScreen> {
+                ThirdOnboardingScreen(
+                    onGetStartedPressed = {
+                        navController.navigate(LoginScreen) {
+                            popUpTo(0)
                         }
                     }
                 )

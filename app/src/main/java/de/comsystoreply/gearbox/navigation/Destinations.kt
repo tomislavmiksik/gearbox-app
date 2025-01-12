@@ -15,6 +15,9 @@ data object FirstOnboardingScreen : Destination
 data object SecondOnboardingScreen : Destination
 
 @Serializable
+data object ThirdOnboardingScreen : Destination
+
+@Serializable
 data object LoginScreen : Destination
 
 @Serializable

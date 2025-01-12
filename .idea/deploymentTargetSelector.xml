@@ -15,10 +15,10 @@
       </SelectionState>
       <SelectionState runConfigName="Gearbox">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-09-25T07:56:13.951875Z">
+        <DropdownSelection timestamp="2025-09-15T16:52:26.064186Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="Default" identifier="serial=emulator-5554;connection=11ba059f" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/tomislavmiksik/.android/avd/Pixel_8_API_33.avd" />
             </handle>
           </Target>
         </DropdownSelection>

@@ -11,12 +11,26 @@
     <string name="onboarding_next">Next</string>
     <string name="onboarding_get_started">Get Started</string>
 
+    <string name="onboarding_title_1">Rev up your passion</string>
+    <string name="onboarding_desc_1">Gearbox is your one-stop shop for all things automotive. Share your love for cars, connect with fellow enthusiasts, and discover a world of car content.</string>
+
+    <string name="onboarding_title_2">Shift into High Gear</string>
+    <string name="onboarding_desc_2">Follow topics you love, from classic muscle cars to cutting-edge EVs. Create your profile and showcase your own ride.</string>
+
+    <string name="onboarding_title_3">Hit the road</string>
+    <string name="onboarding_desc_3">Sign up or sign in to join the Gearbox community. Get ready to share your passion and explore the world of cars!</string>
+
     <!-- Login -->
-    <string name="login_title">Sign In</string>
+    <string name="login_title">Welcome to the Gearbox!</string>
+    <string name="login_subtitle">We are happy to see you in our community</string>
     <string name="login_email">Email</string>
     <string name="login_password">Password</string>
-    <string name="login_button">Login</string>
+    <string name="login_button">Sign In</string>
     <string name="login_back">Back</string>
+    <string name="login_google">Continue with Google</string>
+    <string name="login_apple">Continue with Apple</string>
+    <string name="login_email_hint">Your email</string>
+    <string name="login_password_hint">Your password</string>
 
     <!-- Home -->
     <string name="home_welcome">Welcome Home</string>

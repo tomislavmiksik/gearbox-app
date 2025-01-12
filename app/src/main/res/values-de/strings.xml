@@ -10,13 +10,27 @@
     <string name="onboarding_description">Ihr Automotive-Begleiter</string>
     <string name="onboarding_next">Weiter</string>
     <string name="onboarding_get_started">Loslegen</string>
+    
+    <string name="onboarding_title_1">Entfachen Sie Ihre Leidenschaft</string>
+    <string name="onboarding_desc_1">Entdecken Sie erstaunliche Automotive-Inhalte und\nvernetzen Sie sich mit anderen Enthusiasten.</string>
+    
+    <string name="onboarding_title_2">In den hohen Gang schalten</string>
+    <string name="onboarding_desc_2">Zugang zu exklusiven Automotive-Guides und\nverbessern Sie Ihr Fahrerlebnis.</string>
+    
+    <string name="onboarding_title_3">Auf die Straße gehen</string>
+    <string name="onboarding_desc_3">Treten Sie der Community bei und starten Sie\nheute Ihre Automotive-Reise.</string>
 
     <!-- Login -->
-    <string name="login_title">Anmelden</string>
+    <string name="login_title">Willkommen bei Gearbox!</string>
+    <string name="login_subtitle">Wir freuen uns, Sie in unserer Community zu sehen</string>
     <string name="login_email">E-Mail</string>
     <string name="login_password">Passwort</string>
     <string name="login_button">Anmelden</string>
     <string name="login_back">Zurück</string>
+    <string name="login_google">Mit Google fortfahren</string>
+    <string name="login_apple">Mit Apple fortfahren</string>
+    <string name="login_email_hint">Ihre E-Mail</string>
+    <string name="login_password_hint">Ihr Passwort</string>
 
     <!-- Home -->
     <string name="home_welcome">Willkommen zu Hause</string>
