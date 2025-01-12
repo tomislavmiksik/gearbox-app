@@ -7,8 +7,13 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import android.util.Patterns
+import de.comsystoreply.gearbox.domain.models.AuthResult
+import de.comsystoreply.gearbox.domain.models.AuthenticationRequest
+import de.comsystoreply.gearbox.domain.repository.AuthRepository
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(
+    private val authRepository: AuthRepository
+) : ViewModel() {
     
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()
@@ -58,24 +63,30 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
             
-            try {
-                // TODO: Replace with actual repository call
-                // val result = authRepository.login(currentState.email, currentState.password)
-                
-                // Simulate network call
-                kotlinx.coroutines.delay(1500)
-                
-                // Simulate success for demo
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false,
-                    isLoginSuccessful = true
-                )
-                
-            } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false,
-                    error = e.message ?: "Login failed. Please try again."
-                )
+            val request = AuthenticationRequest(
+                email = currentState.email,
+                password = currentState.password
+            )
+            
+            when (val result = authRepository.signIn(request)) {
+                is AuthResult.Success -> {
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        isLoginSuccessful = true
+                    )
+                }
+                is AuthResult.Error -> {
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = result.message
+                    )
+                }
+                is AuthResult.NetworkError -> {
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = result.message
+                    )
+                }
             }
         }
     }
@@ -84,21 +95,12 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
             
-            try {
-                // TODO: Implement Google Sign-In
-                kotlinx.coroutines.delay(1000)
-                
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false,
-                    isLoginSuccessful = true
-                )
-                
-            } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false,
-                    error = "Google sign-in failed. Please try again."
-                )
-            }
+            // TODO: Implement Google Sign-In with proper OAuth flow
+            // For now, show a placeholder message
+            _uiState.value = _uiState.value.copy(
+                isLoading = false,
+                error = "Google Sign-In not implemented yet"
+            )
         }
     }
     
@@ -106,21 +108,12 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, error = null)
             
-            try {
-                // TODO: Implement Apple Sign-In
-                kotlinx.coroutines.delay(1000)
-                
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false,
-                    isLoginSuccessful = true
-                )
-                
-            } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false,
-                    error = "Apple sign-in failed. Please try again."
-                )
-            }
+            // TODO: Implement Apple Sign-In with proper OAuth flow
+            // For now, show a placeholder message
+            _uiState.value = _uiState.value.copy(
+                isLoading = false,
+                error = "Apple Sign-In not implemented yet"
+            )
         }
     }
     

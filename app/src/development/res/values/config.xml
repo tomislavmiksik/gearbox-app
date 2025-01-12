@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Development Environment Configuration -->
+    <string name="api_base_url">http://10.0.2.2:8080</string>
+    <string name="environment_name">Development</string>
+    <bool name="is_debug_mode">true</bool>
+    <bool name="enable_logging">true</bool>
+</resources>

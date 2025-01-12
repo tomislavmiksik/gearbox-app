@@ -16,7 +16,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import de.comsystoreply.gearbox.R
-import de.comsystoreply.gearbox.features.home.viewmodel.HomeViewModel
+import de.comsystoreply.gearbox.features.home.ui.viewmodel.HomeViewModel
 import de.comsystoreply.gearbox.navigation.BlogScreen
 import de.comsystoreply.gearbox.navigation.HomeNavigation
 import org.koin.androidx.compose.koinViewModel

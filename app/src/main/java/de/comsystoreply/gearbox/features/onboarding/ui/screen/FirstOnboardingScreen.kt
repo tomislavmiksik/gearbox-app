@@ -3,8 +3,7 @@ package de.comsystoreply.gearbox.features.onboarding.ui.screen
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import de.comsystoreply.gearbox.R
-import de.comsystoreply.gearbox.common.presentation.composable.OnboardingScreen
-
+import de.comsystoreply.gearbox.ui.components.onboarding.OnboardingScreen
 
 @Composable
 fun FirstOnboardingScreen(onNextPressed: () -> Unit) {

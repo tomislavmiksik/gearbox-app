@@ -42,6 +42,25 @@
     <!-- Profile -->
     <string name="profile_title">Welcome to Profile</string>
 
+    <!-- API Endpoints -->
+    <string name="api_endpoint_auth">/api/auth</string>
+    <string name="api_endpoint_test">/api/test</string>
+    <string name="api_endpoint_users">/api/users</string>
+    <string name="api_endpoint_blogs">/api/blogs</string>
+    
+    <!-- Error Messages -->
+    <string name="error_network">Network connection error</string>
+    <string name="error_server">Server error occurred</string>
+    <string name="error_unauthorized">Invalid credentials</string>
+    <string name="error_unknown">An unexpected error occurred</string>
+    <string name="error_timeout">Request timeout</string>
+    
+    <!-- Configuration (defaults) -->
+    <string name="api_base_url">http://10.0.2.2:8080</string>
+    <string name="environment_name">Development</string>
+    <bool name="is_debug_mode">true</bool>
+    <bool name="enable_logging">true</bool>
+    
     <!-- Common -->
     <string name="action_loading">Loading…</string>
     <string name="action_error">Error occurred</string>

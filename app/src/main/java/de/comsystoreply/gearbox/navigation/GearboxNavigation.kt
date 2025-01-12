@@ -9,7 +9,6 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import de.comsystoreply.gearbox.features.blogs.ui.screen.BlogScreen
 import de.comsystoreply.gearbox.features.home.ui.screen.HomeScreen
@@ -19,7 +18,7 @@ import de.comsystoreply.gearbox.features.profile.ui.screen.ProfileScreen
 
 @Composable
 fun GearboxNavigation(
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
 ) {
     NavHost(
         navController = navController,
@@ -40,11 +39,6 @@ fun GearboxNavigation(
 
         composable<LoginScreen> {
             LoginScreen(
-                onBackPressed = {
-                    navController.navigate(OnboardingGraph) {
-                        launchSingleTop = true
-                    }
-                },
                 onLoginPressed = {
                     navController.navigate(HomeGraph) {
                         popUpTo(OnboardingGraph) { inclusive = true }
@@ -71,7 +65,7 @@ fun GearboxNavigation(
 fun HomeNavigation(
     navController: NavHostController = rememberNavController(),
     logout: () -> Unit,
-    contentPadding: PaddingValues = PaddingValues()
+    contentPadding: PaddingValues = PaddingValues(),
 ) {
     NavHost(
         navController = navController,

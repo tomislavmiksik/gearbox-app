@@ -23,12 +23,53 @@ android {
     }
 
     buildTypes {
+        debug {
+            isDebuggable = true
+            applicationIdSuffix = ".debug"
+            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:8080/\"")
+            buildConfigField("String", "API_VERSION", "\"v1\"")
+            buildConfigField("Boolean", "ENABLE_LOGGING", "true")
+        }
+        
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"https://api.gearbox.com/\"")
+            buildConfigField("String", "API_VERSION", "\"v1\"")
+            buildConfigField("Boolean", "ENABLE_LOGGING", "false")
+        }
+    }
+    
+    flavorDimensions += "environment"
+    
+    productFlavors {
+        create("development") {
+            dimension = "environment"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:8080/\"")
+            buildConfigField("String", "ENVIRONMENT", "\"development\"")
+            resValue("string", "app_name", "Gearbox Dev")
+        }
+        
+        create("staging") {
+            dimension = "environment"
+            applicationIdSuffix = ".staging"
+            versionNameSuffix = "-staging"
+            buildConfigField("String", "BASE_URL", "\"https://staging-api.gearbox.com/\"")
+            buildConfigField("String", "ENVIRONMENT", "\"staging\"")
+            resValue("string", "app_name", "Gearbox Staging")
+        }
+        
+        create("production") {
+            dimension = "environment"
+            buildConfigField("String", "BASE_URL", "\"https://api.gearbox.com/\"")
+            buildConfigField("String", "ENVIRONMENT", "\"production\"")
+            resValue("string", "app_name", "Gearbox")
         }
     }
     compileOptions {
@@ -40,6 +81,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
