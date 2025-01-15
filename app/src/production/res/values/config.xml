@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Production Environment Configuration -->
-    <string name="api_base_url">https://api.gearbox.com</string>
+    <!-- Production Environment Configuration (fallbacks) -->
+    <string name="api_base_url">http://localhost:8080</string>
     <string name="environment_name">Production</string>
     <bool name="is_debug_mode">false</bool>
     <bool name="enable_logging">false</bool>

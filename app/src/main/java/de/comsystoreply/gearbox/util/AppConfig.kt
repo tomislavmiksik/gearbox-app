@@ -8,27 +8,27 @@ object AppConfig {
     
     /**
      * Get the base URL for API calls
-     * Priority: BuildConfig > String Resources > Fallback
+     * Priority: Environment Variables > String Resources > Fallback
      */
     fun getBaseUrl(context: Context): String {
-        return when {
-            BuildConfig.BASE_URL.isNotEmpty() -> BuildConfig.BASE_URL
-            else -> {
-                try {
-                    context.getString(R.string.api_base_url)
-                } catch (e: Exception) {
-                    "http://10.0.2.2:8080/" // Fallback for development
-                }
+        return try {
+            val flavor = getCurrentFlavor()
+            EnvConfig.getBaseUrlForFlavor(flavor)
+        } catch (e: Exception) {
+            try {
+                context.getString(R.string.api_base_url)
+            } catch (e: Exception) {
+                "http://10.0.2.2:8080" // Fallback for development
             }
         }
     }
     
     /**
-     * Get API version from BuildConfig
+     * Get API version from environment variables
      */
     fun getApiVersion(): String {
         return try {
-            BuildConfig.API_VERSION
+            EnvConfig.apiVersion
         } catch (e: Exception) {
             "v1" // Default fallback
         }
@@ -39,17 +39,14 @@ object AppConfig {
      */
     fun isLoggingEnabled(context: Context): Boolean {
         return try {
-            // Check if BuildConfig has ENABLE_LOGGING field
-            BuildConfig::class.java.getDeclaredField("ENABLE_LOGGING")
-            BuildConfig.ENABLE_LOGGING
-        } catch (e: NoSuchFieldException) {
+            val flavor = getCurrentFlavor()
+            EnvConfig.getLoggingEnabledForFlavor(flavor)
+        } catch (e: Exception) {
             try {
                 context.resources.getBoolean(R.bool.enable_logging)
             } catch (e: Exception) {
                 BuildConfig.DEBUG // Fallback to debug mode
             }
-        } catch (e: Exception) {
-            BuildConfig.DEBUG
         }
     }
     
@@ -58,17 +55,25 @@ object AppConfig {
      */
     fun getEnvironment(context: Context): String {
         return try {
-            // Check if BuildConfig has ENVIRONMENT field
-            BuildConfig::class.java.getDeclaredField("ENVIRONMENT")
-            BuildConfig.ENVIRONMENT
-        } catch (e: NoSuchFieldException) {
+            val flavor = getCurrentFlavor()
+            EnvConfig.getEnvironmentNameForFlavor(flavor)
+        } catch (e: Exception) {
             try {
                 context.getString(R.string.environment_name)
             } catch (e: Exception) {
                 "development" // Fallback
             }
+        }
+    }
+    
+    /**
+     * Get the current build flavor
+     */
+    private fun getCurrentFlavor(): String {
+        return try {
+            BuildConfig.FLAVOR
         } catch (e: Exception) {
-            "development"
+            "development" // Default fallback
         }
     }
     

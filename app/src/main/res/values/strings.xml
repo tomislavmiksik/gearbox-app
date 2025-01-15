@@ -55,8 +55,8 @@
     <string name="error_unknown">An unexpected error occurred</string>
     <string name="error_timeout">Request timeout</string>
     
-    <!-- Configuration (defaults) -->
-    <string name="api_base_url">http://10.0.2.2:8080</string>
+    <!-- Configuration (defaults - fallbacks only) -->
+    <string name="api_base_url">http://localhost:8080</string>
     <string name="environment_name">Development</string>
     <bool name="is_debug_mode">true</bool>
     <bool name="enable_logging">true</bool>

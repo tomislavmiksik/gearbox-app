@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Staging Environment Configuration -->
-    <string name="api_base_url">https://staging-api.gearbox.com</string>
+    <!-- Staging Environment Configuration (fallbacks) -->
+    <string name="api_base_url">http://localhost:8080</string>
     <string name="environment_name">Staging</string>
     <bool name="is_debug_mode">true</bool>
     <bool name="enable_logging">true</bool>
