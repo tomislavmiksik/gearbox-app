@@ -129,7 +129,7 @@ fun OnboardingScreenPreview() {
         buttonText = stringResource(R.string.onboarding_next),
         title = stringResource(R.string.onboarding_title_1),
         description = stringResource(R.string.onboarding_desc_1),
-        imageRes = android.R.drawable.ic_menu_camera, // Using built-in drawable for preview
+        imageRes = R.drawable.onboarding_picture_first, // Using built-in drawable for preview
         currentPage = 1,
         totalPages = 3,
     ) { }

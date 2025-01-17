@@ -27,7 +27,7 @@ android {
             isDebuggable = true
             applicationIdSuffix = ".debug"
         }
-        
+
         release {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -37,9 +37,9 @@ android {
             )
         }
     }
-    
+
     flavorDimensions += "environment"
-    
+
     productFlavors {
         create("development") {
             dimension = "environment"
@@ -48,7 +48,7 @@ android {
             buildConfigField("String", "FLAVOR", "\"development\"")
             resValue("string", "app_name", "Gearbox Dev")
         }
-        
+
         create("staging") {
             dimension = "environment"
             applicationIdSuffix = ".staging"
@@ -56,7 +56,7 @@ android {
             buildConfigField("String", "FLAVOR", "\"staging\"")
             resValue("string", "app_name", "Gearbox Staging")
         }
-        
+
         create("production") {
             dimension = "environment"
             buildConfigField("String", "FLAVOR", "\"production\"")

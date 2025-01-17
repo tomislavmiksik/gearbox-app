@@ -5,20 +5,21 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.google.gson.Gson
-import de.comsystoreply.gearbox.domain.services.ApiService
 import de.comsystoreply.gearbox.data.repository.AuthRepositoryImpl
 import de.comsystoreply.gearbox.domain.repository.AuthRepository
+import de.comsystoreply.gearbox.domain.services.ApiService
 import de.comsystoreply.gearbox.features.home.ui.viewmodel.HomeViewModel
 import de.comsystoreply.gearbox.features.login.ui.viewmodel.LoginViewModel
+import de.comsystoreply.gearbox.util.AppConfig
+import de.comsystoreply.gearbox.util.Constants.AUTH_PREFERENCES
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import java.util.concurrent.TimeUnit
-import de.comsystoreply.gearbox.util.Constants.AUTH_PREFERENCES
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 val appModule = module {
     single<DataStore<Preferences>> {
@@ -32,19 +33,19 @@ val appModule = module {
 
 val networkModule = module {
     single<String>(qualifier = named("baseUrl")) {
-        de.comsystoreply.gearbox.util.AppConfig.getBaseUrl(androidContext())
+        AppConfig.getBaseUrl()
     }
-    
+
     single<HttpLoggingInterceptor> {
         HttpLoggingInterceptor().apply {
-            level = if (de.comsystoreply.gearbox.util.AppConfig.isLoggingEnabled(androidContext())) {
+            level = if (AppConfig.isLoggingEnabled()) {
                 HttpLoggingInterceptor.Level.BODY
             } else {
                 HttpLoggingInterceptor.Level.NONE
             }
         }
     }
-    
+
     single<OkHttpClient> {
         OkHttpClient.Builder()
             .addInterceptor(get<HttpLoggingInterceptor>())
