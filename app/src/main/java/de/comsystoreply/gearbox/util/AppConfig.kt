@@ -8,7 +8,7 @@ object AppConfig {
 
     fun getBaseUrl(): String = EnvConfig.apiBaseUrl
 
-    fun getApiVersion(): String = EnvConfig.apiVersion
+    fun getEnvironmentName(): String = EnvConfig.environmentName
 
     fun isLoggingEnabled(): Boolean = EnvConfig.enableLogging
 

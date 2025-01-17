@@ -1,7 +1,9 @@
 package de.comsystoreply.gearbox.util
 
+import de.comsystoreply.gearbox.BuildConfig
+
 object EnvConfig {
-    val apiBaseUrl get(): String = "http://10.0.2.2:8080"
-    val apiVersion get(): String = "Development"
-    val enableLogging get() : Boolean = true
+    val apiBaseUrl: String get() = BuildConfig.API_BASE_URL
+    val environmentName: String get() = BuildConfig.ENVIRONMENT_NAME
+    val enableLogging: Boolean get() = BuildConfig.LOGGING_ENABLED
 }

@@ -11,7 +11,7 @@ object ConfigDebugInfo {
         if (BuildConfig.DEBUG) {
             Timber.d("=== App Configuration Debug Info ===")
             Timber.d("Base URL: ${AppConfig.getBaseUrl()}")
-            Timber.d("API Version: ${AppConfig.getApiVersion()}")
+            Timber.d("Environment: ${AppConfig.getEnvironmentName()}")
             Timber.d("Logging Enabled: ${AppConfig.isLoggingEnabled()}")
             Timber.d("Debug Mode: ${AppConfig.isDebugMode(context)}")
             Timber.d("Build Type: ${BuildConfig.BUILD_TYPE}")

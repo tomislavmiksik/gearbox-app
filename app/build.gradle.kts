@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -20,6 +22,12 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        val properties = Properties()
+        properties.load(project.rootProject.file("local.properties").inputStream())
+        buildConfigField("String", "API_BASE_URL", "\"${properties.getProperty("api.baseUrl")}\"")
+        buildConfigField("String", "ENVIRONMENT_NAME", "\"${properties.getProperty("env")}\"")
+        buildConfigField("boolean", "LOGGING_ENABLED", properties.getProperty("logging.enabled"))
     }
 
     buildTypes {
@@ -38,31 +46,6 @@ android {
         }
     }
 
-    flavorDimensions += "environment"
-
-    productFlavors {
-        create("development") {
-            dimension = "environment"
-            applicationIdSuffix = ".dev"
-            versionNameSuffix = "-dev"
-            buildConfigField("String", "FLAVOR", "\"development\"")
-            resValue("string", "app_name", "Gearbox Dev")
-        }
-
-        create("staging") {
-            dimension = "environment"
-            applicationIdSuffix = ".staging"
-            versionNameSuffix = "-staging"
-            buildConfigField("String", "FLAVOR", "\"staging\"")
-            resValue("string", "app_name", "Gearbox Staging")
-        }
-
-        create("production") {
-            dimension = "environment"
-            buildConfigField("String", "FLAVOR", "\"production\"")
-            resValue("string", "app_name", "Gearbox")
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -138,7 +121,4 @@ dependencies {
 
     //Datastore
     implementation(libs.androidx.datastore.preferences)
-
-    //DotEnv
-    implementation(libs.dotenv)
 }
