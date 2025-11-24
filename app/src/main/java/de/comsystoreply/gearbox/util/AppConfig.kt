@@ -3,6 +3,7 @@ package de.comsystoreply.gearbox.util
 import android.content.Context
 import de.comsystoreply.gearbox.BuildConfig
 import de.comsystoreply.gearbox.R
+import de.comsystoreply.gearbox.resource.GearboxString
 
 object AppConfig {
 
@@ -36,20 +37,22 @@ object AppConfig {
      * Get specific API endpoints
      */
     object Endpoints {
-        fun auth(context: Context): String = context.getString(R.string.api_endpoint_auth)
-        fun test(context: Context): String = context.getString(R.string.api_endpoint_test)
-        fun users(context: Context): String = context.getString(R.string.api_endpoint_users)
-        fun blogs(context: Context): String = context.getString(R.string.api_endpoint_blogs)
+        fun auth(context: Context): String = context.getString(GearboxString.api_endpoint_auth)
+        fun test(context: Context): String = context.getString(GearboxString.api_endpoint_test)
+        fun users(context: Context): String = context.getString(GearboxString.api_endpoint_users)
+        fun blogs(context: Context): String = context.getString(GearboxString.api_endpoint_blogs)
     }
 
     /**
      * Get error messages
      */
     object ErrorMessages {
-        fun network(context: Context): String = context.getString(R.string.error_network)
-        fun server(context: Context): String = context.getString(R.string.error_server)
-        fun unauthorized(context: Context): String = context.getString(R.string.error_unauthorized)
-        fun unknown(context: Context): String = context.getString(R.string.error_unknown)
-        fun timeout(context: Context): String = context.getString(R.string.error_timeout)
+        fun network(context: Context): String = context.getString(GearboxString.error_network)
+        fun server(context: Context): String = context.getString(GearboxString.error_server)
+        fun unauthorized(context: Context): String =
+            context.getString(GearboxString.error_unauthorized)
+
+        fun unknown(context: Context): String = context.getString(GearboxString.error_unknown)
+        fun timeout(context: Context): String = context.getString(GearboxString.error_timeout)
     }
 }

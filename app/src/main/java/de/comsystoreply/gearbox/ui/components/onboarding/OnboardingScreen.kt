@@ -26,6 +26,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import de.comsystoreply.gearbox.R
+import de.comsystoreply.gearbox.resource.GearboxDrawable
+import de.comsystoreply.gearbox.resource.GearboxString
 import de.comsystoreply.gearbox.ui.components.buttons.GearboxButton
 import de.comsystoreply.gearbox.ui.components.indicators.GearboxPageIndicator
 import de.comsystoreply.gearbox.ui.components.text.GearboxHeading
@@ -126,10 +128,10 @@ fun OnboardingScreen(
 @Composable
 fun OnboardingScreenPreview() {
     OnboardingScreen(
-        buttonText = stringResource(R.string.onboarding_next),
-        title = stringResource(R.string.onboarding_title_1),
-        description = stringResource(R.string.onboarding_desc_1),
-        imageRes = R.drawable.onboarding_picture_first, // Using built-in drawable for preview
+        buttonText = stringResource(GearboxString.onboarding_next),
+        title = stringResource(GearboxString.onboarding_title_1),
+        description = stringResource(GearboxString.onboarding_desc_1),
+        imageRes = GearboxDrawable.onboarding_picture_first, // Using built-in drawable for preview
         currentPage = 1,
         totalPages = 3,
     ) { }

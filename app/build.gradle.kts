@@ -4,17 +4,19 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ksp)
     kotlin("plugin.serialization") version "2.0.20"
 }
 
 android {
     namespace = "de.comsystoreply.gearbox"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "de.comsystoreply.gearbox"
         minSdk = 29
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -101,10 +103,10 @@ dependencies {
     // Testing Navigation
     androidTestImplementation(libs.navigation.testing)
 
-    //Koin
-    implementation(libs.koin.android)
-    implementation(libs.koin.androidx.compose)
-    implementation(libs.koin.core)
+    //Hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt.navigation.compose)
 
     //Timber
     implementation(libs.timber)

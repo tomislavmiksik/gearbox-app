@@ -26,21 +26,21 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import de.comsystoreply.gearbox.R
 import de.comsystoreply.gearbox.features.login.ui.viewmodel.LoginIntent
 import de.comsystoreply.gearbox.features.login.ui.viewmodel.LoginViewModel
+import de.comsystoreply.gearbox.resource.GearboxString
 import de.comsystoreply.gearbox.ui.components.buttons.GearboxButton
-import de.comsystoreply.gearbox.ui.components.buttons.GearboxOutlinedButton
 import de.comsystoreply.gearbox.ui.components.inputs.GearboxTextField
 import de.comsystoreply.gearbox.ui.components.text.GearboxSubtitle
 import de.comsystoreply.gearbox.ui.components.text.GearboxTitle
-import org.koin.androidx.compose.koinViewModel
 
 
 @Composable
 fun LoginScreen(
     onLoginPressed: () -> Unit,
-    viewModel: LoginViewModel = koinViewModel(),
+    viewModel: LoginViewModel = hiltViewModel(),
 ) {
     val snackBarHostState = remember { SnackbarHostState() }
     val uiState by viewModel.uiState.collectAsState()
@@ -73,41 +73,42 @@ fun LoginScreen(
                 }
             )
         }
-    ) { it ->
+    ) { _ ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .statusBarsPadding()
                 .navigationBarsPadding()
                 .background(Color.White)
-                .padding(26.dp),
+                .padding(horizontal = 26.dp),
         ) {
             Spacer(modifier = Modifier.height(80.dp))
             GearboxTitle(
-                text = stringResource(R.string.login_title),
-                textAlign = TextAlign.Center
+                text = stringResource(GearboxString.login_title),
+                textAlign = TextAlign.Left
             )
             Spacer(modifier = Modifier.height(8.dp))
             GearboxSubtitle(
-                text = stringResource(R.string.login_subtitle),
-                textAlign = TextAlign.Start
+                text = stringResource(GearboxString.login_subtitle),
+                textAlign = TextAlign.Left
             )
             Spacer(modifier = Modifier.height(40.dp))
             GearboxTextField(
                 value = uiState.email,
                 onValueChange = { viewModel.handleIntent(LoginIntent.EmailChanged(it)) },
-                label = stringResource(R.string.login_email),
-                placeholder = stringResource(R.string.login_email_hint),
+                label = stringResource(GearboxString.login_email),
+                placeholder = stringResource(GearboxString.login_email_hint),
                 keyboardType = KeyboardType.Email,
                 isError = !uiState.isEmailValid,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                errorMessage = uiState.error
             )
             Spacer(modifier = Modifier.height(16.dp))
             GearboxTextField(
                 value = uiState.password,
                 onValueChange = { viewModel.handleIntent(LoginIntent.PasswordChanged(it)) },
-                label = stringResource(R.string.login_password),
-                placeholder = stringResource(R.string.login_password_hint),
+                label = stringResource(GearboxString.login_password),
+                placeholder = stringResource(GearboxString.login_password_hint),
                 keyboardType = KeyboardType.Password,
                 isError = !uiState.isPasswordValid,
                 visualTransformation = PasswordVisualTransformation(),
@@ -115,27 +116,12 @@ fun LoginScreen(
             )
             Spacer(modifier = Modifier.height(16.dp))
             GearboxButton(
-                text = if (uiState.isLoading) "Signing in..." else stringResource(R.string.login_button),
+                text = if (uiState.isLoading) "Signing in..." else stringResource(GearboxString.login_button),
                 onClick = { viewModel.handleIntent(LoginIntent.LoginClicked) },
                 enabled = !uiState.isLoading && uiState.email.isNotBlank() && uiState.password.isNotBlank(),
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(24.dp))
-            GearboxOutlinedButton(
-                text = stringResource(R.string.login_google),
-                onClick = { viewModel.handleIntent(LoginIntent.GoogleLoginClicked) },
-                enabled = !uiState.isLoading,
-                modifier = Modifier.fillMaxWidth()
-            )
-            Spacer(modifier = Modifier.height(12.dp))
-            GearboxOutlinedButton(
-                text = stringResource(R.string.login_apple),
-                onClick = { viewModel.handleIntent(LoginIntent.AppleLoginClicked) },
-                enabled = !uiState.isLoading,
-                backgroundColor = Color.Black,
-                textColor = Color.White,
-                modifier = Modifier.fillMaxWidth()
-            )
         }
     }
 }

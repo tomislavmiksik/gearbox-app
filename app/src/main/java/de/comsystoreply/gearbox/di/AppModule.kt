@@ -1,43 +1,46 @@
 package de.comsystoreply.gearbox.di
 
+import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
 import com.google.gson.Gson
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import de.comsystoreply.gearbox.data.repository.AuthRepositoryImpl
 import de.comsystoreply.gearbox.domain.repository.AuthRepository
 import de.comsystoreply.gearbox.domain.services.ApiService
-import de.comsystoreply.gearbox.features.home.ui.viewmodel.HomeViewModel
-import de.comsystoreply.gearbox.features.login.ui.viewmodel.LoginViewModel
 import de.comsystoreply.gearbox.util.AppConfig
 import de.comsystoreply.gearbox.util.Constants.AUTH_PREFERENCES
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
-val appModule = module {
-    single<DataStore<Preferences>> {
-        PreferenceDataStoreFactory.create(
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
+        return PreferenceDataStoreFactory.create(
             produceFile = {
-                androidContext().preferencesDataStoreFile(AUTH_PREFERENCES)
+                context.preferencesDataStoreFile(AUTH_PREFERENCES)
             }
         )
     }
-}
 
-val networkModule = module {
-    single<String>(qualifier = named("baseUrl")) {
-        AppConfig.getBaseUrl()
-    }
-
-    single<HttpLoggingInterceptor> {
-        HttpLoggingInterceptor().apply {
+    @Provides
+    @Singleton
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
             level = if (AppConfig.isLoggingEnabled()) {
                 HttpLoggingInterceptor.Level.BODY
             } else {
@@ -46,19 +49,23 @@ val networkModule = module {
         }
     }
 
-    single<OkHttpClient> {
-        OkHttpClient.Builder()
-            .addInterceptor(get<HttpLoggingInterceptor>())
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .build()
     }
 
-    single<Retrofit> {
-        Retrofit.Builder()
-            .baseUrl(get<String>(qualifier = named("baseUrl")))
-            .client(get<OkHttpClient>())
+    @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(AppConfig.getBaseUrl())
+            .client(okHttpClient)
             .addConverterFactory(
                 GsonConverterFactory.create(
                     Gson().newBuilder()
@@ -69,16 +76,19 @@ val networkModule = module {
             .build()
     }
 
-    single<ApiService> {
-        get<Retrofit>().create(ApiService::class.java)
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
-}
 
-val repositoryModule = module {
-    single<AuthRepository> { AuthRepositoryImpl(get(), get(), androidContext()) }
-}
-
-val viewModelModule = module {
-    factory { HomeViewModel(get()) }
-    factory { LoginViewModel(get()) }
+    @Provides
+    @Singleton
+    fun provideAuthRepository(
+        apiService: ApiService,
+        dataStore: DataStore<Preferences>,
+        @ApplicationContext context: Context
+    ): AuthRepository {
+        return AuthRepositoryImpl(apiService, dataStore, context)
+    }
 }

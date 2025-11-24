@@ -1,6 +1,5 @@
 package de.comsystoreply.gearbox.features.home.ui.screen
 
-import android.annotation.SuppressLint
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Newspaper
 import androidx.compose.material.icons.outlined.Settings
@@ -15,22 +14,22 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import de.comsystoreply.gearbox.R
+import androidx.hilt.navigation.compose.hiltViewModel
 import de.comsystoreply.gearbox.features.home.ui.viewmodel.HomeViewModel
 import de.comsystoreply.gearbox.navigation.BlogScreen
 import de.comsystoreply.gearbox.navigation.HomeNavigation
-import org.koin.androidx.compose.koinViewModel
+import de.comsystoreply.gearbox.resource.GearboxString
 
 @Composable
 fun HomeScreen(
     logout: () -> Unit,
-    viewModel: HomeViewModel = koinViewModel<HomeViewModel>()
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val navController = rememberNavController()
 
     val bottomNavItems = listOf(
         BottomNavItems(
-            title = stringResource(R.string.nav_blogs),
+            title = stringResource(GearboxString.nav_blogs),
             icon = Icons.Outlined.Newspaper,
             onClick = {
                 navController.navigate(BlogScreen) {
@@ -41,7 +40,7 @@ fun HomeScreen(
             }
         ),
         BottomNavItems(
-            title = stringResource(R.string.nav_garage),
+            title = stringResource(GearboxString.nav_garage),
             icon = Icons.Outlined.Settings,
             onClick = {
                 navController.navigate(de.comsystoreply.gearbox.navigation.GarageScreen) {
@@ -62,7 +61,7 @@ fun HomeScreen(
         }
     ) { paddingValues ->
         HomeNavigation(
-            navController = navController, 
+            navController = navController,
             logout = logout,
             contentPadding = paddingValues
         )
@@ -73,7 +72,7 @@ fun HomeScreen(
 @Composable
 fun BottomNavigationBar(
     items: List<BottomNavItems>,
-    currentDestination: NavDestination?
+    currentDestination: NavDestination?,
 ) {
     NavigationBar {
         items.forEach { item ->
@@ -100,5 +99,5 @@ data class BottomNavItems(
     val title: String,
     val icon: ImageVector,
     val onClick: () -> Unit,
-    val destinationName: String = title.lowercase()
+    val destinationName: String = title.lowercase(),
 )

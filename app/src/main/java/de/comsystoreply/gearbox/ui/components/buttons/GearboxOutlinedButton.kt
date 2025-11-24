@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.comsystoreply.gearbox.R
+import de.comsystoreply.gearbox.resource.GearboxString
 
 @Composable
 fun GearboxOutlinedButton(
@@ -23,7 +24,7 @@ fun GearboxOutlinedButton(
     modifier: Modifier = Modifier,
     backgroundColor: Color = Color.Transparent,
     textColor: Color = colorResource(R.color.black),
-    enabled: Boolean = true
+    enabled: Boolean = true,
 ) {
     OutlinedButton(
         onClick = onClick,
@@ -48,7 +49,7 @@ fun GearboxOutlinedButton(
 @Composable
 fun GearboxOutlinedButtonPreview() {
     GearboxOutlinedButton(
-        text = stringResource(R.string.login_google),
+        text = stringResource(GearboxString.login_google),
         onClick = { }
     )
 }
@@ -57,7 +58,7 @@ fun GearboxOutlinedButtonPreview() {
 @Composable
 fun GearboxOutlinedButtonBlackPreview() {
     GearboxOutlinedButton(
-        text = stringResource(R.string.login_apple),
+        text = stringResource(GearboxString.login_apple),
         onClick = { },
         backgroundColor = colorResource(R.color.black),
         textColor = colorResource(R.color.white)
@@ -68,7 +69,7 @@ fun GearboxOutlinedButtonBlackPreview() {
 @Composable
 fun GearboxOutlinedButtonDisabledPreview() {
     GearboxOutlinedButton(
-        text = stringResource(R.string.login_button),
+        text = stringResource(GearboxString.login_button),
         onClick = { },
         enabled = false
     )

@@ -3,6 +3,7 @@ package de.comsystoreply.gearbox.features.login.ui.viewmodel
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import de.comsystoreply.gearbox.domain.models.AuthResult
 import de.comsystoreply.gearbox.domain.models.AuthenticationRequest
 import de.comsystoreply.gearbox.domain.repository.AuthRepository
@@ -10,8 +11,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel(
+@HiltViewModel
+class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository,
 ) : ViewModel() {
 

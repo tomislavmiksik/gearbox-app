@@ -12,13 +12,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import de.comsystoreply.gearbox.R
+import de.comsystoreply.gearbox.resource.GearboxString
 
 @Composable
 fun GearboxTitle(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = colorResource(R.color.black),
-    textAlign: TextAlign = TextAlign.Start
+    textAlign: TextAlign = TextAlign.Start,
 ) {
     Text(
         text = text,
@@ -35,7 +36,7 @@ fun GearboxSubtitle(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = Color.Gray,
-    textAlign: TextAlign = TextAlign.Start
+    textAlign: TextAlign = TextAlign.Start,
 ) {
     Text(
         text = text,
@@ -51,7 +52,7 @@ fun GearboxHeading(
     text: String,
     modifier: Modifier = Modifier,
     color: Color = colorResource(R.color.black),
-    textAlign: TextAlign = TextAlign.Start
+    textAlign: TextAlign = TextAlign.Start,
 ) {
     Text(
         text = text,
@@ -69,7 +70,7 @@ fun GearboxBodyText(
     modifier: Modifier = Modifier,
     color: Color = colorResource(R.color.black),
     textAlign: TextAlign = TextAlign.Start,
-    fontSize: TextUnit = 16.sp
+    fontSize: TextUnit = 16.sp,
 ) {
     Text(
         text = text,
@@ -84,7 +85,7 @@ fun GearboxBodyText(
 @Composable
 fun GearboxTitlePreview() {
     GearboxTitle(
-        text = stringResource(R.string.login_title),
+        text = stringResource(GearboxString.login_title),
         textAlign = TextAlign.Center
     )
 }
@@ -93,7 +94,7 @@ fun GearboxTitlePreview() {
 @Composable
 fun GearboxSubtitlePreview() {
     GearboxSubtitle(
-        text = stringResource(R.string.login_subtitle),
+        text = stringResource(GearboxString.login_subtitle),
         textAlign = TextAlign.Center
     )
 }
@@ -102,7 +103,7 @@ fun GearboxSubtitlePreview() {
 @Composable
 fun GearboxHeadingPreview() {
     GearboxHeading(
-        text = stringResource(R.string.onboarding_title_1)
+        text = stringResource(GearboxString.onboarding_title_1)
     )
 }
 
@@ -110,6 +111,6 @@ fun GearboxHeadingPreview() {
 @Composable
 fun GearboxBodyTextPreview() {
     GearboxBodyText(
-        text = stringResource(R.string.onboarding_desc_1)
+        text = stringResource(GearboxString.onboarding_desc_1)
     )
 }

@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import de.comsystoreply.gearbox.R
+import de.comsystoreply.gearbox.resource.GearboxString
 
 @Composable
 fun GearboxButton(
@@ -48,7 +49,7 @@ fun GearboxButton(
 @Composable
 fun GearboxButtonPreview() {
     GearboxButton(
-        text = stringResource(R.string.login_button),
+        text = stringResource(GearboxString.login_button),
         onClick = { }
     )
 }
@@ -57,7 +58,7 @@ fun GearboxButtonPreview() {
 @Composable
 fun GearboxButtonDisabledPreview() {
     GearboxButton(
-        text = stringResource(R.string.login_button),
+        text = stringResource(GearboxString.login_button),
         onClick = { },
         enabled = false
     )
@@ -67,7 +68,7 @@ fun GearboxButtonDisabledPreview() {
 @Composable
 fun GearboxButtonCustomColorPreview() {
     GearboxButton(
-        text = stringResource(R.string.onboarding_next),
+        text = stringResource(GearboxString.onboarding_next),
         onClick = { },
         backgroundColor = colorResource(R.color.red),
         textColor = colorResource(R.color.white)

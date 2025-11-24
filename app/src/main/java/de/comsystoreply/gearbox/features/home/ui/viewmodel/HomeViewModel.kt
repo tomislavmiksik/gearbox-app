@@ -2,12 +2,14 @@ package de.comsystoreply.gearbox.features.home.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import de.comsystoreply.gearbox.domain.models.TestResponse
 import de.comsystoreply.gearbox.domain.services.ApiService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 data class HomeUiState(
     val isLoading: Boolean = false,
@@ -21,7 +23,8 @@ sealed interface HomeIntent {
     object ErrorDismissed : HomeIntent
 }
 
-class HomeViewModel(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     private val apiService: ApiService
 ) : ViewModel() {
 
